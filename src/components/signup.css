@@ -1,0 +1,41 @@
+.auth-container {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.auth-container input {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.3s ease;
+}
+
+.auth-container input:focus {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 10px rgba(220, 38, 38, 0.2);
+  outline: none;
+}
+
+.auth-container button {
+  transition: all 0.3s ease;
+}
+
+.auth-container button:hover {
+  background: #b91c1c !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.auth-container a {
+  color: #dc2626;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.auth-container a:hover {
+  color: #b91c1c;
+  text-decoration: underline;
+}
