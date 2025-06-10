@@ -15,27 +15,27 @@ const productsByCategory = {
   ],
   Snacks: [
     { name: "Cheese Croissant", price: 5, image: "/croissant.jpg", rating: 4, reviews: 40, stock: 50 },
-    { name: "Mini Sausage Roll", price: 3, image: "/snack1.jpg", rating: 4, reviews: 25, stock: 60 },
-    { name: "Chicken Pie", price: 6, image: "/snack2.jpg", rating: 5, reviews: 35, stock: 30 },
-    { name: "Veggie Puff", price: 4, image: "/snack3.jpg", rating: 4, reviews: 20, stock: 40 },
-    { name: "Ham & Cheese Roll", price: 5, image: "/snack4.jpg", rating: 5, reviews: 18, stock: 25 },
-    { name: "Spicy Meat Pie", price: 6, image: "/snack5.jpg", rating: 4, reviews: 22, stock: 15 },
+    { name: "Mini Sausage Roll", price: 3, image: "/sausage rolls.jpg", rating: 4, reviews: 25, stock: 60 },
+    { name: "Chicken Pie", price: 6, image: "/chicken pie.jpg", rating: 5, reviews: 35, stock: 30 },
+    { name: "Veggie Puff", price: 4, image: "/vegie puffs.jpg", rating: 4, reviews: 20, stock: 40 },
+    { name: "Ham & Cheese Roll", price: 5, image: "/hac.jpg", rating: 5, reviews: 18, stock: 25 },
+    { name: "Spicy Meat Pie", price: 6, image: "/meatpie.jpg", rating: 4,   reviews: 22, stock: 15 },
   ],
   Desserts: [
-    { name: "Chocolate Mousse", price: 7, image: "/dessert1.jpg", rating: 5, reviews: 60, stock: 30 },
-    { name: "Fruit Tart", price: 8, image: "/dessert2.jpg", rating: 4, reviews: 45, stock: 20 },
-    { name: "Lemon Cheesecake", price: 9, image: "/dessert3.jpg", rating: 5, reviews: 55, stock: 25 },
-    { name: "Tiramisu", price: 10, image: "/dessert4.jpg", rating: 5, reviews: 70, stock: 18 },
-    { name: "Panna Cotta", price: 8, image: "/dessert5.jpg", rating: 4, reviews: 30, stock: 22 },
-    { name: "Berry Parfait", price: 7, image: "/dessert6.jpg", rating: 4, reviews: 28, stock: 16 },
+    { name: "Chocolate Mousse", price: 7, image: "/Chocolate Mousse.jpg", rating: 5, reviews: 60, stock: 30 },
+    { name: "Fruit Tart", price: 8, image: "/Fruit Tart.jpg", rating: 4, reviews: 45, stock: 20 },
+    { name: "Lemon Cheesecake", price: 9, image: "/Lemon Cheesecake.jpg", rating: 5, reviews: 55, stock: 25 },
+    { name: "Tiramisu", price: 10, image: "/Tiramisu.jpg", rating: 5, reviews: 70, stock: 18 },
+    { name: "Panna Cotta", price: 8, image: "/Panna Cotta.jpg", rating: 4, reviews: 30, stock: 22 },
+    { name: "Berry Parfait", price: 7, image: "/Berry Parfait.jpg", rating: 4, reviews: 28, stock: 16 },
   ],
   Others: [
     { name: "Macarons", price: 6, image: "/macroons.jpg", rating: 5, reviews: 80, stock: 40 },
     { name: "Donuts", price: 5, image: "/donuts.jpg", rating: 4, reviews: 50, stock: 35 },
     { name: "Eclair", price: 7, image: "/eclair.jpg", rating: 5, reviews: 60, stock: 20 },
-    { name: "Baklava", price: 8, image: "/other1.jpg", rating: 4, reviews: 18, stock: 10 },
-    { name: "Apple Pie", price: 9, image: "/other2.jpg", rating: 5, reviews: 25, stock: 12 },
-    { name: "Cinnamon Roll", price: 6, image: "/other3.jpg", rating: 4, reviews: 30, stock: 15 },
+    { name: "Baklava", price: 8, image: "/b.jpg", rating: 4, reviews: 18, stock: 10 },
+    { name: "Apple Pie", price: 9, image: "/apple pie.jpg", rating: 5, reviews: 25, stock: 12 },
+    { name: "Cinnamon Roll", price: 6, image: "/cr.jpg", rating: 4, reviews: 30, stock: 15 },
   ],
 };
 
@@ -48,7 +48,6 @@ export function ShopPage() {
   const navigate = useNavigate();
 
   function handleLogout() {
-    // Mock logout: just redirect to login
     setProfileOpen(false);
     navigate('/login');
   }
@@ -63,7 +62,7 @@ export function ShopPage() {
         <nav className="nav">
           <ul className="nav-list">
             <li className="nav-item"><a href="/">Home</a></li>
-            <li className="nav-item active"><a href="/shop">Store</a></li>
+            <li className="nav-item active"><a href="/shop">Shop</a></li>
             <li className="nav-item"><a href="/rewards">Rewards</a></li>
             <li className="nav-item"><a href="/about">About</a></li>
             <li className="nav-item"><a href="/contact">Contact</a></li>

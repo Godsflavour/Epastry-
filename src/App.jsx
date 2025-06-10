@@ -8,7 +8,6 @@ import "./components/style.css"
 import Login from './components/Login';
 import Signup from './components/Signup';
 
-// Import Font Awesome components and icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
@@ -48,7 +47,6 @@ function HomePage() {
     }
   ];
   
-  // Delivery locations data with colors
   const deliveryLocations = [
     {
       city: "Abuja",
@@ -86,7 +84,7 @@ function HomePage() {
       name: "Wedding Cake",
       price: "500.00",
       category: "Cakes",
-      image: "/cake1.png",
+      image: "/wc.jpg",
       isNew: false,
     },
     {
@@ -94,7 +92,7 @@ function HomePage() {
       name: "Birthday Red Velvet",
       price: "75.00",
       category: "Cakes",
-      image: "/cake2.png",
+      image: "/velvet 2.jpg",
       isNew: true,
     },
     {
@@ -102,7 +100,7 @@ function HomePage() {
       name: "Mango Delight Cake",
       price: "60.00",
       category: "Cakes",
-      image: "/cake3.png",
+      image: "/mango cake.jpg",
       isNew: false,
     },
     {
@@ -110,7 +108,7 @@ function HomePage() {
       name: "Chocolate Fudge Cake",
       price: "85.00",
       category: "Cakes",
-      image: "/cake4.png",
+      image: "/cfc.jpg",
       isNew: true,
     },
      {
@@ -146,6 +144,48 @@ function HomePage() {
       isNew: true,
     },
   ];
+
+  const [occasionIndex, setOccasionIndex] = useState(0);
+  const occasionsData = [
+    {
+      title: "Weddings",
+      image: "/wedding1.jpg"
+    },
+    {
+      title: "Birthdays",
+      image: "/birthday.jpg"
+    },
+    {
+      title: "Parties",
+      image: "/party.jpg"
+    },
+    {
+      title: "Self-love",
+      image: "/self-love.jpg"
+    }
+  ];
+
+  // Add auto-rotation effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOccasionIndex((prev) => (prev === occasionsData.length - 1 ? 0 : prev + 1));
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [occasionsData.length]);
+
+  // Add pause on hover functionality
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setOccasionIndex((prev) => (prev === occasionsData.length - 1 ? 0 : prev + 1));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isPaused, occasionsData.length]);
 
   function handleFaqClick(id) {
     if (openFaq === id) {
@@ -231,13 +271,15 @@ function HomePage() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <h1>Delight in every bite</h1>
-          <p>
-            Discover the finest handcrafted pastries and cakes made with love and the finest ingredients.
-          </p>
-          <div className="hero-buttons">
-            <button className="order-btn">Shop Now</button>
-            <button className="menu-btn">Sell Now</button>
+          <div className="hero-text-content">
+            <h1>Delight in every bite</h1>
+            <p>
+              Discover the finest handcrafted pastries and cakes made with love and the finest ingredients.
+            </p>
+            <div className="hero-buttons">
+              <button className="order-btn">Shop Now</button>
+              <button className="menu-btn">Sell Now</button>
+            </div>
           </div>
           <div className="stats">
             <div className="stat-box">
@@ -307,19 +349,41 @@ function HomePage() {
         <h2 className="occasion-title">Shop By Occasion</h2>
         <p className="occasion-subtitle">Enjoy your favorite cakes and pastries on your special day.</p>
         <div className="occasion-pill-bg">
-          <div className="occasion-images-row">
-            <div className="occasion-image-card">
-              <img src="/wedding1.jpg" alt="Weddings"/>
+          <div 
+            className="occasion-carousel-container"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <div className="occasion-images-row">
+              {occasionsData.map((occasion, idx) => {
+                let cardClass = "occasion-image-card";
+                if (idx === occasionIndex) {
+                  cardClass += " active";
+                } else if (idx === (occasionIndex - 1 + occasionsData.length) % occasionsData.length) {
+                  cardClass += " prev";
+                } else if (idx === (occasionIndex + 1) % occasionsData.length) {
+                  cardClass += " next";
+                }
+
+                return (
+                  <div key={idx} className={cardClass}>
+                    <img src={occasion.image} alt={occasion.title} />
+                    <div className="occasion-overlay">
+                      <h3>{occasion.title}</h3>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <div className="occasion-image-card">
-              <img src="/birthday.jpg" alt="Birthdays" />
-            </div>
-            <div className="occasion-image-card">
-              <img src="/party.jpg" alt="Parties"/>
-            </div>
-            <div className="occasion-image-card">
-              <img src="/self-love.jpg" alt="Self-love"/>
-            </div>
+          </div>
+          <div className="occasion-progress">
+            {occasionsData.map((_, idx) => (
+              <span 
+                key={idx} 
+                className={`occasion-progress-dot${occasionIndex === idx ? ' active' : ''}`}
+                onClick={() => setOccasionIndex(idx)}
+              ></span>
+            ))}
           </div>
         </div>
         <button className="occasion-shop-btn">Shop Now</button>
@@ -328,7 +392,7 @@ function HomePage() {
       {/* Delivery Section with Dynamic Colors */}
       <section 
         className="delivery-modern"
-        style={{ background: currentLocation.color }} // Dynamic background color
+        style={{ background: currentLocation.color }} 
       >
         <div className="delivery-header">
           <span className="delivery-title">
@@ -408,16 +472,18 @@ function HomePage() {
             </div>
             <div className="testimonials-arrows-row">
               <button
-                className="arrow-btn-custom left"
-                onClick={() => setTestimonialIndex((prev) => (prev === 0 ? testimonialsData.length - 1 : prev - 1))}
+                className={`arrow-btn-custom left ${testimonialIndex === 0 ? 'disabled' : ''}`}
+                onClick={() => setTestimonialIndex((prev) => (prev === 0 ? prev : prev - 1))}
                 aria-label="Previous testimonial"
+                disabled={testimonialIndex === 0}
               >
                 <span>&larr;</span>
               </button>
               <button
-                className="arrow-btn-custom right"
-                onClick={() => setTestimonialIndex((prev) => (prev === testimonialsData.length - 1 ? 0 : prev + 1))}
+                className={`arrow-btn-custom right ${testimonialIndex === testimonialsData.length - 1 ? 'disabled' : ''}`}
+                onClick={() => setTestimonialIndex((prev) => (prev === testimonialsData.length - 1 ? prev : prev + 1))}
                 aria-label="Next testimonial"
+                disabled={testimonialIndex === testimonialsData.length - 1}
               >
                 <span>&rarr;</span>
               </button>
@@ -550,7 +616,6 @@ function HomePage() {
 const RewardsCarousel = () => {
   const [activeCard, setActiveCard] = useState(0);
 
-
   const rewardCards = [
     { image: '/rewards1.png' },
     { image: '/reward 2.png' },
@@ -560,13 +625,13 @@ const RewardsCarousel = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveCard((prev) => (prev + 2) % rewardCards.length);
-    }, 1000);
+      setActiveCard((prev) => (prev + 1) % rewardCards.length);
+    }, 3000);
     return () => clearInterval(interval);
   }, [rewardCards.length]);
 
   const handleCardClick = () => {
-    setActiveCard((prev) => (prev + 2) % rewardCards.length);
+    setActiveCard((prev) => (prev + 1) % rewardCards.length);
   };
 
   return (
@@ -576,13 +641,70 @@ const RewardsCarousel = () => {
         <p style={{ marginBottom: 4 }}>Get rewarded for every bite! 🍰✨</p>
         <p style={{ marginBottom: 4 }}>With Pastry Empire Rewards, you earn points on every purchase and redeem them for exclusive discounts.</p>
       </div>
-      <div className="rewards-carousel-card-wrapper" style={{ width: 300, height: 384, maxWidth: '90vw', margin: '0 auto', borderRadius: 32, overflow: 'hidden', boxShadow: '0 8px 32px rgba(153,4,23,0.10)', background: '#fee2e2', cursor: 'pointer' }}>
-        <img
-          src={rewardCards[activeCard].image}
-          alt={`Reward card ${activeCard + 1}`}
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-          onClick={handleCardClick}
-        />
+      <div className="rewards-carousel-wrapper" style={{ position: 'relative', width: '100%', maxWidth: '1200px', margin: '0 auto', height: '300px' }}>
+        <div className="rewards-carousel-track" style={{ 
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          {rewardCards.map((card, index) => {
+       
+            const angle = (index - activeCard) * (360 / rewardCards.length);
+            const radius = 10; 
+            const x = Math.cos((angle * Math.PI) / 180) * radius;
+            const y = Math.sin((angle * Math.PI) / 180) * radius;
+            const distance = Math.abs(angle);
+            const scale = 1 - (distance / 180) * 0.5;
+            const opacity = 1 - (distance / 180) * 0.5;
+
+            return (
+              <div 
+                key={index}
+                className="rewards-carousel-card-wrapper" 
+                style={{ 
+                  position: 'absolute',
+                  width: '200px', 
+                  height: '256px', 
+                  transform: `translate(${x}px, ${y}px) scale(${scale})`,
+                  borderRadius: '24px', 
+                  overflow: 'hidden', 
+                  boxShadow: '0 8px 32px rgba(153,4,23,0.10)', 
+                  background: '#fee2e2', 
+                  cursor: 'pointer',
+                  opacity: opacity,
+                  transition: 'all 0.5s ease',
+                  zIndex: Math.round(scale * 10)
+                }}
+              >
+                <img
+                  src={card.image}
+                  alt={`Reward card ${index + 1}`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  onClick={handleCardClick}
+                />
+              </div>
+            );
+          })}
+        </div>
+        <div className="rewards-progress" style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '20px' }}>
+          {rewardCards.map((_, index) => (
+            <span 
+              key={index}
+              style={{
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                background: index === activeCard ? '#990417' : 'rgba(153,4,23,0.2)',
+                cursor: 'pointer',
+                transition: 'background 0.3s ease'
+              }}
+              onClick={() => setActiveCard(index)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

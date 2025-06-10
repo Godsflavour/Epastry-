@@ -193,6 +193,8 @@
   
   .hero-content {
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
   
   @media (min-width: 768px) {
@@ -202,8 +204,8 @@
     }
   }
 
-  .products-title{
-    font-family: 'Playfair Display', serif;
+  .hero-text-content {
+    margin-bottom: 30px;
   }
   
   .hero h1 {
@@ -240,6 +242,7 @@
   .hero-buttons {
     display: flex;
     gap: 15px;
+    margin-bottom: 30px;
   }
   
   .order-btn {
@@ -308,9 +311,9 @@
     display: flex;
     justify-content: flex-start;
     gap: 16px;
-    padding: 30px 20px;
+    padding: 0;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0;
   }
   
   .stat-box {
@@ -1252,6 +1255,9 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 32px;
+    width: 100%;
+    height: 300px; 
+    position: relative;
   }
   
   .delivery-city {
@@ -1260,19 +1266,29 @@
     font-weight: 700;
     margin-bottom: 0.5rem;
     text-align: center;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .delivery-subtitle {
     font-size: 1.3rem;
     text-align: center;
     margin-bottom: 2rem;
+    min-height: 32px; /* Fixed height for subtitle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .delivery-illustration {
     width: 320px;
+    height: 200px; /* Fixed height for illustration */
     max-width: 80vw;
     margin: 0 auto;
     display: block;
+    object-fit: contain; /* Ensure image maintains aspect ratio */
   }
   
   .delivery-pagination {
@@ -1315,6 +1331,7 @@
     opacity: 1;
     transition: opacity 0.25s ease-in;
   }
+  
   .fade-out {
     opacity: 0;
     transition: opacity 0.25s ease-out;
@@ -1565,6 +1582,16 @@
     filter: brightness(0.93);
   }
 
+  .arrow-btn-custom.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .arrow-btn-custom.disabled:hover {
+    filter: none;
+  }
+
   .testimonials-carousel-track {
     /* Already set inline, but you can add here for global effect */
     display: flex;
@@ -1695,5 +1722,130 @@
   
   .app-footer {
     font-family: 'Playfair Display', serif;
+  }
+  
+  /* Occasion Carousel Styles */
+  .occasion-carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+    margin: 0 100px;
+  }
+
+  .occasion-images-row {
+    display: flex;
+    gap: 20px;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .occasion-image-card {
+    width: 280px;
+    height: 320px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+
+  .occasion-image-card.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+  }
+
+  .occasion-image-card.prev,
+  .occasion-image-card.next {
+    opacity: 0.7;
+    transform: scale(0.9);
+    z-index: 1;
+  }
+
+  .occasion-image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .occasion-image-card:hover img {
+    transform: scale(1.05);
+  }
+
+  .occasion-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 20px;
+    color: white;
+  }
+
+  .occasion-overlay h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .occasion-arrow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .occasion-arrow-btn:hover {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .occasion-arrow-btn.left {
+    left: 20px;
+  }
+
+  .occasion-arrow-btn.right {
+    right: 20px;
+  }
+
+  .occasion-progress {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .occasion-progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .occasion-progress-dot.active {
+    background: #990417;
+    transform: scale(1.2);
+  }
+
+  .occasion-progress-dot:hover {
+    background: #990417;
   }
   

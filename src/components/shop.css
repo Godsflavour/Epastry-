@@ -139,8 +139,6 @@
   position: relative;
 }
 
-.shop-product-price {
-}
 
 .shop-product-rating {
   color: #dc2626;
@@ -152,15 +150,7 @@
   color: #888;
   margin-left: 4px;
 }
-.shop-product-btn {
-}
 
-.shop-footer {
-}
-.shop-footer-content {
-}
-.shop-footer-column {
-}
 .shop-footer-copyright {
   text-align: center;
   margin-top: 32px;
